@@ -1,0 +1,39 @@
+# Virtual Environment
+venv/
+env/
+ENV/
+
+# Python Cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Database & Temp Files
+*.db
+*.sqlite
+*.sqlite3
+output.db
+*.tmp
+
+# Environment Variables
+.env
+.env.local
+
+# Logs
+*.log
