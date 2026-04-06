@@ -25,5 +25,5 @@ RUN python -c "from models import DataJanitorAction, DataJanitorObservation, Env
 # Expose port for HF Spaces
 EXPOSE 7860
 
-# Default command: run web server on port 7860
-CMD ["python", "-m", "http.server", "7860"]
+# Default command: run OpenEnv API server
+CMD ["python", "app.py"]
