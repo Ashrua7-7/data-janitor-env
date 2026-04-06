@@ -11,7 +11,6 @@ This is a **reinforcement learning environment** (similar to OpenAI Gym) where:
 - **3 Progressive Tasks**: Easy (load CSV to DB), Medium (standardize date formats), Hard (merge JSON+CSV, compute LTV)
 - **Deterministic grading**: Same input → same score every time (perfect for testing)
 - **Mock agent included**: Solves all tasks perfectly without AI/API keys (proves environment works)
-- **Optional GPT-4 integration**: Test real LLMs by setting `OPENAI_API_KEY`
 
 **Use case**: Train/test data engineering agents, debug data pipelines, validate data cleaning logic locally.
 
@@ -156,9 +155,7 @@ Reward: +1.00
 **Environment Variables (REQUIRED)**:
 ```bash
 HF_TOKEN=hf_...                              # Hugging Face token OR
-OPENAI_API_KEY=sk_...                        # OpenAI API key
 
-API_BASE_URL=https://api.openai.com/v1       # Optional, LLM endpoint (default: OpenAI)
 MODEL_NAME=gpt-4                             # Optional, model name (default: gpt-4)
 ```
 
@@ -173,7 +170,6 @@ Inference script emits structured logs for evaluation:
 
 **How it works**:
 - Reads environment variables (API_BASE_URL, MODEL_NAME, HF_TOKEN/OPENAI_API_KEY)
-- Creates configurable AsyncOpenAI client (supports custom endpoints)
 - System prompt tells LLM to respond with JSON only
 - Loop: Send task observation → parse JSON → execute action → add results to conversation
 - Emits structured logs on stdout for validator parsing
@@ -185,7 +181,6 @@ cp .env.example .env
 
 # Edit .env with your credentials
 # HF_TOKEN=hf_your_token_here
-# or OPENAI_API_KEY=sk_your_key_here
 
 # Run inference
 python inference.py
@@ -201,7 +196,6 @@ Dependencies:
 pandas==2.0.3        # Data manipulation
 numpy==1.24.3        # Numerical computing
 pydantic==2.0.0      # Data validation
-openai==1.3.0        # GPT-4 integration (optional)
 python-dotenv==1.0.0 # Load .env for API keys
 ```
 
@@ -493,11 +487,8 @@ This delta reward system lets agents learn incrementally—they're not just grad
 
 **Setup**:
 ```bash
-# Set API key (Windows PowerShell)
-$env:OPENAI_API_KEY = "sk-..."
 
 # Or create .env file
-echo 'OPENAI_API_KEY=sk-...' > .env
 
 # Run real LLM agent
 python inference.py
